@@ -1,5 +1,5 @@
 # YourCom
-# 2023 1분기 PC 부품 견적 호환성 검사 + 쇼핑몰 개발 구현하기 ![image](https://user-images.githubusercontent.com/105434827/203450173-2d25d896-3c85-4a30-86b7-d63700cb1bd5.png)
+# 2023 1분기 PC 부품 견적 호환성 검사 + 쇼핑몰 개발 구현하기 !
 
 
 
