@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+* {
+	
+	margin: 0;
+	padding:0;
+	list-style: none;
+	box-sizing: border-box;
+}
+
+body {
+	position:relative;
+	width: 100%;
+    height: 100vh;
+}
+#checkFrame {
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-20%);
+	padding: 20px;
+	border: 1px solid #000;
+	border-radius:10px;
+	width:1000px;
+	height: 870px;
+}
+#checkFrame2 {
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(10%,70%);
+	padding: 20px;
+	border: 1px solid #000;
+	border-radius:10px;
+	width:600px;
+	height: 1200px;
+}
+#checkFrame3 {
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-100%,70%);
+	padding: 20px;
+	border: 1px solid #000;
+	border-radius:10px;
+	width:600px;
+	height: 1200px;
+}
+#checkFrame > button {
+	width:70px;
+	height:40px;
+	position:absolute;
+	bottom:2%;
+	right:5%;
+	border-radius:30px;
+	border:none;
+}
+
+#checkFrame > h1 {
+	text-align: center;
+	margin-bottom:30px;
+}
+
+.card_item{
+    display: table;
+    width: 100%;
+    height: 102px;
+    margin-bottom: 18px;
+    border-radius:10px;
+}
+
+.card_item div{
+	display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    background: #F6F6F6;
+}
+
+.part_list{
+	width: 120px;
+}
+
+.part_list .part{
+	display: block;
+    height: 30px;
+    line-height: 30px;
+    background: #fff;
+    border-radius: 20px;
+    margin: 10px 0;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.result{
+    padding-left: 18px;
+    padding-right: 25px;
+}
+
+.result p{
+    text-align: left;
+    line-height: 20px;
+}

@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/FinalCheck.css}">
+  <script src="/js/http_code.jquery.com_jquery-3.6.1.js"></script>
+  <!-- jQuery -->
+    <script src="/js/http_cdn.iamport.kr_js_iamport.payment-1.1.8.js"></script>
+
+  <!-- iamport.payment.js -->
+  <script src = "/js/main.js" ></script>
+  <style>
+    .fixed-footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    .selected {
+      font-weight: bold;
+      position: relative;
+      padding: 10px;
+    }
+
+    .selected:before {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-style: solid;
+    }
+    .container {
+      display: flex;
+    }
+
+    .left {
+      flex: 1;
+    }
+
+    .right {
+      flex: 1;
+    }
+
+    .product {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<input type="radio" class="input" name="slide" id="slide1" checked>
+<input type="radio" class="input" name="slide" id="slide2">
+<input type="radio" class="input" name="slide" id="slide3">
+<input type="radio" class="input" name="slide" id="slide4">
+
+
+<input type="radio" class="input" name="p_btn" id="part1" checked>
+<input type="radio" class="input" name="p_btn" id="part2">
+<input type="radio" class="input" name="p_btn" id="part3">
+<input type="radio" class="input" name="p_btn" id="part4">
+<input type="radio" class="input" name="p_btn" id="part5">
+<input type="radio" class="input" name="p_btn" id="part6">
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <a href="/AfterMain"><img class ="logoimg"src="/img/logo.png"></a>
+    </div>
+    <ul>
+      <li id="_service" class="_service">부품 설명</li>
+      <li id="_select_com" class="_select_com">
+        <a href="/estimate">부품 선택</a>
+      </li>
+      <li id="_boardcom" class="_select_com">
+        <a href="/board">견적요청</a>
+      </li>
+      <li id="_logout" class="_logout">
+        <a href="/session/logout">로그아웃</a>
+      </li>
+      <li id="_Insert" class="_logout">
+        <a href="/MachineInsert">부품추가</a>
+      </li>
+      <li id="_user" class="_user">
+        <p th:text="${session.loginName3}">Nice to meet you!</p>
+        <p th:text="${session.loginName2}">님 반갑습니다!</p>
+        <p th:text="${session.loginName}">님 반갑습니다!</p>
+      </li>
+    </ul>
+  </div>
+</header>
+
+
+
+<!-- 견적 칸 -->
+<div class="info">
+</div>
+<div id="checkFrame">
+  <h1>PC 호환성 검사</h1>
+  <ul class="card_list">
+    <li class="card_item">
+      <div class="part_list">
+        <span class="part">cpu</span>
+        <span class="part">MAINBOARD</span>
+      </div>
+      <div class="result">
+        <label for="cpu_dropdown"></label>
+        <select id="cpu_dropdown">
+          <option value="">CPU를 선택하세요.</option>
+          <option value="Intel Core i9-11900K">Intel Core i9-11900K</option>
+          <option value="AMD Ryzen 9 5950X">AMD Ryzen 9 5950X</option>
+          <option value="Intel Core i7-11700K">Intel Core i7-11700K</option>
+          <option value="AMD Ryzen 7 5800X">AMD Ryzen 7 5800X</option>
+          <option value="Intel Core i5-11600K">Intel Core i5-11600K</option>
+          <option value="AMD Ryzen 5 5600X">AMD Ryzen 5 5600X</option>
+          <option value="Intel Core i3-10100">Intel Core i3-10100</option>
+          <option value="AMD Ryzen 3 3300X">AMD Ryzen 3 3300X</option>
+        </select>
+        <select id="mainboard_dropdown2">
+          <option value="">메인보드를 선택하세요</option>
+          <option value="ASUS ROG Strix Z590-E">ASUS ROG Strix Z590-E</option>
+          <option value="GIGABYTE AORUS X570 Master">GIGABYTE AORUS X570 Master</option>
+          <option value="MSI MPG B550 Gaming Edge WiFi">MSI MPG B550 Gaming Edge WiFi</option>
+          <option value="ASRock B450M Pro4">ASRock B450M Pro4</option>
+        </select>
+        <span class="partd" onclick="checkCompatibility('cpu_dropdown','cpu')">검사</span>
+      </div>
+    </li>
+    <li class="card_item">
+      <div class="part_list">
+        <span class="part">RAM</span>
+        <span class="part">MAINBOARD</span>
+      </div>
+      <div class="result">
+        <select id="ram_dropdown">
+          <option value="">RAM을 선택하세요.</option>
+          <option value="Corsair Vengeance LPX 16GB DDR4 3200">Corsair Vengeance LPX 16GB DDR4 3200</option>
+          <option value="G.Skill Ripjaws V 16GB DDR4 3600">G.Skill Ripjaws V 16GB DDR4 3600</option>
+          <option value="Crucial Ballistix 16GB DDR4 3200">Crucial Ballistix 16GB DDR4 3200</option>
+          <option value="Kingston HyperX Fury 16GB DDR4 3200">Kingston HyperX Fury 16GB DDR4 3200</option>
+          <option value="Team T-FORCE DARK Za 16GB DDR4 3600">Team T-FORCE DARK Za 16GB DDR4 3600</option>
+        </select>
+        <label for="mainboard_dropdown3"></label>
+        <select id="mainboard_dropdown3">
+          <option value="">메인보드를 선택하세요</option>
+          <option value="ASUS ROG Strix Z590-E">ASUS ROG Strix Z590-E</option>
+          <option value="GIGABYTE AORUS X570 Master">GIGABYTE AORUS X570 Master</option>
+          <option value="MSI MPG B550 Gaming Edge WiFi">MSI MPG B550 Gaming Edge WiFi</option>
+          <option value="ASRock B450M Pro4">ASRock B450M Pro4</option>
+        </select>
+        <span class="part" onclick="checkCompatibility2('ram_dropdown', 'ram')">검사</span>
+      </div>
+    </li>
+    <li class="card_item">
+      <div class="part_list">
+        <span class="part">SSD</span>
+        <span class="part">MAINBOARD</span>
+      </div>
+      <div class="result">
+        <label for="ssd_dropdown"></label>
+        <select id="ssd_dropdown">
+          <option value="">SSD를 선택하세요.</option>
+          <option value="Samsung 970 EVO Plus">Samsung 970 EVO Plus</option>
+          <option value="WD Blue SN550">WD Blue SN550</option>
+          <option value="Crucial MX500">Crucial MX500</option>
+          <option value="ADATA XPG SX8200 Pro">ADATA XPG SX8200 Pro</option>
+        </select>
+        <select id="mainboard_dropdown4">
+          <option value="">메인보드를 선택하세요</option>
+          <option value="ASUS ROG Strix Z590-E">ASUS ROG Strix Z590-E</option>
+          <option value="GIGABYTE AORUS X570 Master">GIGABYTE AORUS X570 Master</option>
+          <option value="MSI MPG B550 Gaming Edge WiFi">MSI MPG B550 Gaming Edge WiFi</option>
+          <option value="ASRock B450M Pro4">ASRock B450M Pro4</option>
+        </select>
+        <span class="part" onclick="checkCompatibility3('ssd_dropdown','ssd')">검사</span>
+      </div>
+    </li>
+    <li class="card_item">
+      <div class="part_list">
+        <span class="part">GPU</span>
+        <span class="part">MAINBOARD</span>
+      </div>
+      <div class="result">
+        <label for="gpu_dropdown"></label>
+        <select id="gpu_dropdown">
+          <option value="">그래픽카드를 선택하세요</option>
+          <option value="Nvidia GeForce RTX 3080">Nvidia GeForce RTX 3080</option>
+          <option value="Nvidia GeForce RTX 3070">Nvidia GeForce RTX 3070</option>
+          <option value="Nvidia GeForce RTX 3060 Ti">Nvidia GeForce RTX 3060 Ti</option>
+          <option value="AMD Radeon RX 6900 XT">AMD Radeon RX 6900 XT</option>
+          <option value="AMD Radeon RX 6800 XT">AMD Radeon RX 6800 XT</option>
+          <option value="AMD Radeon RX 6700 XT">AMD Radeon RX 6700 XT</option>
+          <option value="Nvidia GeForce GTX 1660 Super">Nvidia GeForce GTX 1660 Super</option>
+          <option value="AMD Radeon RX 580">AMD Radeon RX 580</option>
+        </select>
+        <select id="mainboard_dropdown5">
+          <option value="">메인보드를 선택하세요</option>
+          <option value="ASUS ROG Strix Z590-E">ASUS ROG Strix Z590-E</option>
+          <option value="GIGABYTE AORUS X570 Master">GIGABYTE AORUS X570 Master</option>
+          <option value="MSI MPG B550 Gaming Edge WiFi">MSI MPG B550 Gaming Edge WiFi</option>
+          <option value="ASRock B450M Pro4">ASRock B450M Pro4</option>
+        </select>
+        <span class="part" onclick="checkCompatibility4('gpu_dropdown','gpu')">검사</span>
+
+      </div>
+    </li>
+    <li class="card_item">
+      <div class="part_list">
+        <span class="part">파워용량</span>
+        <span class="part">MAINBOARD</span>
+      </div>
+      <div class="result">
+        <label for="power_dropdown"></label>
+        <select id="power_dropdown">
+          <option value="">파워를 선택하세요</option>
+          <option value="Corsair RM850x">Corsair RM850x</option>
+          <option value="Seasonic Focus GX-750">Seasonic Focus GX-750</option>
+          <option value="EVGA SuperNOVA 750 G3">EVGA SuperNOVA 750 G3</option>
+          <option value="be quiet! Straight Power 11 750W">be quiet! Straight Power 11 750W</option>
+        </select>
+        <select id="mainboard_dropdown6">
+          <option value="">메인보드를 선택하세요</option>
+          <option value="ASUS ROG Strix Z590-E">ASUS ROG Strix Z590-E</option>
+          <option value="GIGABYTE AORUS X570 Master">GIGABYTE AORUS X570 Master</option>
+          <option value="MSI MPG B550 Gaming Edge WiFi">MSI MPG B550 Gaming Edge WiFi</option>
+          <option value="ASRock B450M Pro4">ASRock B450M Pro4</option>
+        </select>
+        <span class="part" onclick="checkCompatibility5('power_dropdown','power')">검사</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div id="checkFrame2">
+  <!-- 장비 설명 div -->
+  <div class="container">
+    <div class="left">
+      <h1>장 바구니</h1>
+      <li class="card_item">
+        <div class="item_list_cpu">
+          <div id="selectedCPU"></div>
+        </div>
+      </li>
+      <li class="card_item">
+        <div class="item_list_mainboard">
+          <div id="selectedMotherboard"></div>
+        </div>
+      </li>
+      <li class="card_item">
+        <div class="item_list_ssd">
+          <div id="selectedSSD"></div>
+        </div>
+      </li>
+      <li class="card_item">
+        <div class="item_list_gpu">
+          <div id="selectedGPU"></div>
+        </div>
+      </li>
+      <li class="card_item">
+        <div class="item_list_power">
+          <div id="selectedPower"></div>
+        </div>
+      </li>
+      </ul>
+      <button name="paymentButton" id="paymentButton" onclick="requestPay();" class="w-100 btn btn-warning btn-lg" > 결제하기</button>
+
+    </div>
+  </div>
+  </div>
+<div id="checkFrame3">
+  <!-- 장비목록 div -->
+  <div class="container">
+    <div class="left">
+      <h1>장비 목록</h1>
+      <li class="card_item">
+        <div class="cpupart_list">
+          <span class="mainboardpart">cpu</span>
+          <p th:each="cpu : ${cpus}" th:text="${cpu}" th:utext="${cpu + '<br>'}" onclick="selectCPU(this)"></p>
+          <br>
+          <button onclick="sendSelectedCPU()">담기</button>
+        </div>
+      </li>
+      <li class="card_item">
+        <div class="part_list">
+          <span class="mainboardpart">mainboard</span>
+          <p th:each="mainboard : ${mainboards}" th:text="${mainboard}" th:utext="${mainboard + '<br>'}" onclick="selectMotherboard(this)"></p>
+          <br>
+
+          <button onClick="sendSelectedMotherboard()">담기</button>
+
+        </div>
+      </li>
+      <li class="card_item">
+        <div class="part_list">
+          <span class="ssdpart">SSD</span>
+          <p th:each="ssd : ${ssds}" th:text="${ssd}" th:utext="${ssd + '<br>'}" onclick="selectSSD(this)"></p>
+          <br>
+
+          <button onclick="sendSelectedSSD()">담기</button>
+        </div>
+      </li>
+      <li class="card_item">
+        <div class="part_list">
+          <span class="gpupart">GPU</span>
+          <p th:each="gpu : ${gpus}" th:text="${gpu}" th:utext="${gpu + '<br>'}" onclick="selectGPU(this)"></p>
+          <br>
+
+          <button onclick="sendSelectedGPU()">담기</button>
+        </div>
+      </li>
+      <li class="card_item">
+        <div class="part_list">
+          <span class="powerpart">파워용량</span>
+          <p th:each="power : ${powers}" th:text="${power}" th:utext="${power + '<br>'}" onclick="selectPower(this)"></p>
+          <br>
+
+          <button onClick="sendSelectedPower()">담기</button>
+        </div>
+      </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- 부품 설명 모달창-->
+<div class="popup_main">
+  <div class="Part_popup">
+    <h1>
+      부품별 소개 <span class="close">✖️</span>
+    </h1>
+    <div class="btn_box">
+      <label class="btn1" for="part1">CPU</label>
+      <label class="btn1" for="part2">RAM</label>
+      <label class="btn1" for="part3">SSD</label>
+      <label class="btn1" for="part4">MainBoard</label>
+      <label class="btn1" for="part5">GPU</label>
+      <label class="btn1" for="part6">PWR</label>
+    </div>
+    <div class="info m_CPU">
+      <p>
+        CPU는 중앙처리 장치로서 Center Processor Unit의 약자입니다.<br>
+        <br> [사전적 의미]<br> CPU는 뇌와 같은 역할을 하며 사용자로부터 입력 받은 명령어를 해석,
+        <br> 연산 한 후 그 결과를 출력하는 역할을 한다. 그리고 이렇게 하나의 부품에 연산장치, <br>
+        해독 장치, 제어 장치 등이 접적되어 있는 형태를 일컬어 '마이크로 프로세서'라고 한다<br> CPU는 출시된
+        년도 별로 소켓의 수가 달라지며 메인보드에 장착할 때 메인보드와 같은<br> 소켓의 메인보드와 사용해야 한다.
+        <br> <br> [현실]<br> 게임용 PC 혹은 워크스테이션 등 GPU의 뒤를 이어
+        2번째로 높은 가격을 자랑하는 CPU는 <br> 매해 새로운 제품이 나옵니다.<br> CPU를 만드는
+        회사는 주로 Intel, AMD 두 회사이며 각자 다른 장단점을 갖고 있어 PC조립시<br> 본인에게 적합한
+        CPU 제품을 고르셔야 합니다.<br> <br> Intel : 단일 프로세서의 처리속도와 안정성이
+        뛰어나며, 가상화 기능이 포함되어 있습니다.<br> 또한 몇몇 모델을 제외하고는 그래픽 카드를 장착하지 않아도
+        되며 각종 드라이버의 안정성 및 <br> 호환성이 뛰어납니다.<br> 인터페이스의 유리함도 갖고
+        있습니다.<br> 인텔은 완벽하게 썬더볼트를 지원하여 썬더볼트 인터페이스를 활용한 기기간 연결, 혹은 전력 충전<br>
+        이 가능합니다. <br> 단점으로는 AMD CPU보다 비싸다는 단점이있습니다. <br>
+        <br> AMD : 떠오르는 강자로 코어의 수를 동급 대비 Intel CPU보다 많이 가지고 있어 멀티코어
+        프로세서를<br> 이용하는 프로그램에서 강점을 가집니다. 또한 가격이 동급 Intel대비 굉장히 저렴하다는
+        장점이 있습니다.<br> <br> 단점으로는 드라이버의 호완성 문제로 프로그램 실행에 있어 안정성이
+        떨어지며, 부분적 썬더볼트 지원으로<br> 인해 썬더볼트 인터페이스를 잘 활용할 수 없다는 것이 단점입니다.<br><br>
+      </p>
+    </div>
+    <div class="info m_RAM">
+      <p>
+        RAM은 Random Access Memory의 약자이며, CPU가 처리하는 데이터들의 임시저장소로 사용되고 있다.<br>
+        <br> [사전적 의미]<br> 기억된 정보를 읽어내기도 하고 다른 정보를 기억시킬 수도 있는
+        메모리로서, 컴퓨터의 주기억장치,<br> 응용 프로그램의 일시적 로딩(loading), 데이터의 일시적 저장
+        등에 사용된다. <br> <br> [현실]<br> 램은 마치 포스트잇과 같습니다. 우리들이
+        일을 할 때 잠시 옆에 적어두고 다른일을 하듯<br> CPU도 동시 작업을 하기위해 램에 저장해두고 읽고 쓰기를
+        반복합니다.<br> 때문에 '다다익램'이라는 단어가 탄생할 정도로 램의 크기, 용량은 중요합니다.<br>
+        램은 딱 3가지만 구분하면 됩니다. 용량, 속도, 규격<br> <br> <br> [용량]<br>
+        기술이 발전하면서 RAM의 용량은 기하급수적으로 늘어났으며, 8GB부터 16GB 최근에는 32GB램도<br>
+        출시예정입니다. RAM의 용량에 따라 동시 작업처리할 수 있는 양이 늘어납니다.<BR> <br>
+        [속도]<br> RAM은 규격별로 속도가 상이합니다. DDR4 기준으로 2400Mhz 즉, 2.4Ghz 속도가
+        평균이며, <br> 최근에 나온 DDR5는 4.8Ghz 속도를 갖고 있습니다. <br><br> [규격]<br>
+        규격으로는 DDR 규격을 갖습니다. DDR은 Double Date Rate의 약자이며, 현재 DDR4가 표준<BR>
+        DDR5가 최신 제품으로 조명받고 있습니다.<br> 컴퓨터 조립시 RAM은 메인보드에 장착되는데 메인보드의
+        DDR소켓이 사용자의 RAM 소켓과 동일해야하며<br> 상이할 시 장착이 되지 않거나 무리하게 장착할 경우
+        메모리와 메인보드에 심각한 고장을 불러올 수 있습니다. <br><br>
+      </p>
+    </div>
+    <div class="info m_SSD">
+      <p>
+        <br> [사전적 의미]<br> Solid State Drive의 약자이다. SSD는 비휘발성
+        메모리로서 빠른 읽기속도와 쓰기속도로 <br> 하드디스크를 뒤이을 차세대 저장장치로 사용되고 있다. <br>
+        <br> [현실]<br>높은 가격. 하드디스크 '플래터'라고 불리는 자석의 성질을 가진 딱딱한
+        원반이 <br> 여러 장 들어 있는데, 이곳에 자기로 데이터가 저장이 됨으로 가격이 싸다는 것이<br>
+        장점인것과 반대로 특정 데이터를 찾을때 플래터를 전부 읽어서 찾고자 하는 데이터가<br> 읽어질때 까지 플래터를
+        읽어야하기 때문에 느리다는 것이 단점이다.<br> 때문에 비 휘발성 플래시 메모리에 데이터가 저장되는 SSD가
+        각광받고 있다.<br> 빠른 속도의 플래시 메모리는 컴퓨터의 시스템을 저장하기에 적절하다.
+      </p>
+    </div>
+    <div class="info m_HDD">
+      <p>
+        <br> [사전적 의미]<br> Solid State Drive의 약자이다. SSD는 비휘발성
+        메모리로서 빠른 읽기속도와 쓰기속도로 <br> 하드디스크를 뒤이을 차세대 저장장치로 사용되고 있다. <br>
+        <br> [현실]<br> 너무 비싸다. 하드디스크 '플래터'라고 불리는 자석의 성질을 가진 딱딱한
+        원반이 <br> 여러 장 들어 있는데, 이곳에 자기로 데이터가 저장이 됨으로 가격이 싸다는 것이<br>
+        장점인것과 반대로 특정 데이터를 찾을때 플래터를 전부 읽어서 찾고자 하는 데이터가<br> 읽어질때 까지 플래터를
+        읽어야하기 때문에 느리다는 것이 단점이다.<br> 때문에 비 휘발성 플래시 메모리에 데이터가 저장되는 SSD가
+        각광받고 있다.<br> 빠른 속도의 플래시 메모리는 컴퓨터의 시스템을 저장하기에 적절하다.
+      </p>
+    </div>
+    <div class="info m_Mainboard">
+      <p>
+        메인보드는 컴퓨터 부품 장치중 여러 부품을 하나로 통합는 부품으로 외국에서는<br> 여러 부품들을 품는다고 해서
+        마더 보드(MotherBoard)라고 부른다.<br> 메인보드는 CPU, RAM, GPU, SSD 외에 각종
+        쿨러 등 각 부품별로 세대별 규격에<br> 맞게 장착 가능하고 세대별 규격과 다르게 장착시에는 장착이 불가능
+        하거나, <br> 장치에 고장을 불러일으킬 수 있다. <br> <br> [현실]<br>
+        메인보드는 각종 장치를 연결해주는 판으로써 주로 CPU와 GPU, RAM, SSD을 연결해줍니다.<br> 각종
+        부품별로 세대별 소켓 규격이 정해져 있으며, RAM을 예시로 DDR시리즈 뒤에 숫자가 <br> 붙습니다.
+        DDR4규격의 RAM은 DDR4 규격의 메인보드에만 장착할 수 있으며 다른 소켓의CPU를<br> 장착할 경우
+        CPU가 파손되거나 메인보드가 파손될 수 있습니다. <br> <br>
+
+
+      </p>
+    </div>
+    <div class="info m_GPU">
+      <p>
+        GPU는 그래픽을 담당하는 유닛으로 Graphics Processor Unit의 약자입니다.<br>
+        <br> [사전적 의미]<br> GPU는 CPU를 대신하여 그래픽 연산 처리를 담당하는 부품으로,
+        연산결과를<br> 그림이나 텍스트 신호로 변환하여 모니터에 출력해주는 어답터와 같은 부품으로 인식되고 있다.<br>
+        뿐만 아니라 게임이나 3D작업, 멀티미디어들이 점차 발전하기 시작하면서 고도의 그래픽처리를<br> 전용으로
+        담당하는 프로세서 유닛을 말한다. <br> <br> [현실]<br> 작업용 워크스테이션 및
+        게이밍 전용 컴퓨터 기준 모든 부품을 제치고 제일 높은 가격을 자랑하는<br> GPU(이하 그래픽카드)는 현재를
+        살면서 PC시장에서 빠질 수 없는 부품으로 자리 잡고 있습니다.<br> 과거에는 CPU가 그래픽 연산을 겸해
+        그래픽 처리에 할당되는 연산처리 능력을 대신하기 위해 <br> 그래픽 카드를 사용하였다면, 현재 일상에서는
+        유투브 및 4k 영화 시청, 게임, 멀리는 캐드 및 딥머신러닝<br> 등과 같이 오로지 고도의 그래픽 처리를
+        위해 필수로 장착되는 것이 그래픽 카드입니다. 그래픽 카드는 nVIDIA 와 AMD 두 회사가 양각을 이루며 최근
+        Intel 에서도 가성비 그래픽카드를 <br> 출시하며 3자 구도를 형성하였습니다. <br> <br>
+        nVIDIA : 정통적인 그래픽 카드 회사로 GeForce 시리즈를 출시하고 있다. 게이밍에 사용되지만, <br>
+        영상 편집 및 미디어 편집, 3D 모델링 더 나이가 인공지능 학습 개발에도 사용되고 있다. <br> 영상과
+        게임에서 빛의 방향에 따라 그림자 처리나 윤곽 처리를 전용으로 하는 레이트레이싱 유닛을 <br> 포함하고 있다.
+        <br> 단점으로는 다른 회사의 제품보다 비싸고, 최근 유닛의 발열처리 문제가 발생하며 이러한 문제에 <br>
+        대처가 미숙하다는 점이다. <br>
+        <br> AMD : nVIDIA의 뒤를 잇는 그래픽 카드로 nVIDIA 동급모델보다 저럼하다는 장점을 갖고
+        있으며<br> 더 이상 장점은 없다. <br> 단점으로는 드라이버의 호완성 문제로 프로그램 실행에 있어
+        안정성이 떨어지며 이로인해 작업<br> 도중에 프로그램이 정지 되거나 작업물이 제대로 렌더링 되지 않아 결과물에
+        지장을 줄 수 있다. <br>
+        <br> Intel : 최근 AMD를 뒤이어 2인자를 노리는 회사로 기존 보급형 그래픽 카드 시장을 장악하기<br>
+        위해 저렴한 가격의 보급형 신제품을 출시하고 있다. 기존 CPU영역에서의 호완성을 보장하기 때문에 그래픽 카드에서 <br>
+        단점으로는 그래픽 카드 시장 진출 새내기라 제품에 대한 안정성과 문제점이 발견되지 않아<br> 사용자가 제품
+        테스터가 될 수 있다.<br><br>
+
+      </p>
+    </div>
+    <div class="info m_PWR">
+      <p>
+        [사전적 의미]<br> 컴퓨터에 전력을 공급하는 부품으로서 컴퓨터의 안정성을 결정짓는 중요한 역할을 합니다.<br>
+        높은 성능의 CPU나 그래픽카드는 더 많은 전력을 소비하므로 고용량 파워가 필요하며, <br> 일반사무용이나
+        저사양 PC에는 저용량 파워도 구동에 문제가 없습니다. 다만, 단순 표기된<br> 용량이 중요하기보다는 얼마나
+        정확하고 일정한 전력을 공급하는지가 더 중요합니다. <br> 컴퓨터의 성능과 사용용도에 따라 제품을 선택하는
+        것이 좋습니다. <br> <br> [현실]<br> 잘 어루고 달래줘야할 부품입니다.<br>
+        파워 서플라이는 본인이 마음에 들지 않을 경우 터지는 습성을 갖고 있으며 <br> 이때 혼자 가지 않고 다른
+        부품과 함께 고장을 불러내 컴퓨터를 아는 사람들 사이에서<br> 물귀신 작전에 당했다 라고도 표현하고 있습니다.<br>
+        정확히는 전력을 저장하기 위한 콘덴서의 수준에 따라 파워 서플라이가 공급할 수 있는<br> 전력의 양이 정해지며
+        '정격 용량' 이라고 부르고 있습니다.<br> 실제로는 표기용량과 함께 표시가 되는데, 표기 용량은 이론적으로
+        회사가 설계한 용량을<br> 의미하며 정격용량은 실제로 테스트시 발열 및 공급 용량에 따라 인증받은 양을
+        의미합니다.<br> 콘덴서에 과전압이 흐르게 되면 콘덴서는 터지게 되며 자동으로 전력이 차단되게 됩니다.<br>
+        이때 저가 파워의 경우 비상 콘덴서(과전압으로 폭파시 해단 전압을 받아줄 콘덴서)의 수준<br> 이 낮아
+        과전압을 그대로 본체 시스템으로 끌고올 수 있으며 이때 메인보드에 붙어있는 다양한<br> 부품들도 과전압 상태로
+        접어들어 부품 고장을 일으킬 수 있습니다.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- 하단 푸터 일단 삭제해
+<footer class="fixed-footer" style="background-color: black; color: white; padding: 20px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Inha Technical College</h4>
+        <p>3학년 A반 재학</p>
+      </div>
+      <div class="col-md-4">
+        <h4>쇼핑몰 프로젝트</h4>
+        <p>Junior 1st Semester Project</p>
+      </div>
+      <div class="col-md-4">
+        <h4>연락처</h4>
+        <p>22212<br>100 Inha-ro, Michuhol-gu, Incheon <br>Tel: 032-870-2114<br>E-mail: sangmin5848@naver.com</p>
+      </div>
+    </div>
+  </div>
+</footer>
+-->
+</body>
+<script type="text/javascript">
+
+  /** 결제 **/
+          // 결제 금액, 구매자의 이름, 이메일
+  const priceAmount = $('테스트').val();
+  const buyerMemberEmail = $('테스트').val();
+  const buyerMemberName = $('테스트').val();
+  // const form = document.getElementById("payment");
+  console.log(priceAmount);
+  console.log(buyerMemberName);
+  console.log(buyerMemberEmail);
+  const IMP = window.IMP;
+  IMP.init('imp76532316');
+
+  function requestPay() {
+    //가맹점 식별코드
+    IMP.init('imp76532316');
+    IMP.request_pay({
+      pg: "kakaopay.TC0ONETIME",
+      pay_method: 'card',
+      merchant_uid: 'merchant_' + new Date().getTime(),
+      name: '장바구니', //결제창에서 보여질 이름
+      amount: 100, //실제 결제되는 가격
+      buyer_email: 'sangmin5848@naver.com',
+      buyer_name: '이상민',
+      buyer_tel: '010-9293-3217',
+      buyer_addr: '인천광역시 미추홀구 용현동 인하공업전문대학',
+      buyer_postcode: '123-456'
+    }, function (rsp) {
+      console.log(rsp);
+      if (rsp.success) {
+        var msg = '결제가 완료되었습니다.';
+        msg += '고유ID : ' + rsp.imp_uid;
+        msg += '상점 거래ID : ' + rsp.merchant_uid;
+        msg += '결제 금액 : ' + rsp.paid_amount;
+        msg += '카드 승인번호 : ' + rsp.apply_num;
+      } else {
+        var msg = '결제에 실패하였습니다.';
+        msg += '에러내용 : ' + rsp.error_msg;
+      }
+      alert(msg);
+    });
+  }
+
+</script>
+<script type="text/javascript">
+
+
+  var selectedGPUElement = null; // Variable to store the selected GPU element
+  var selectedPowerElement = null; // Variable to store the selected power supply element
+
+  // Function to handle GPU selection
+  function selectGPU(gpuElement) {
+    if (selectedGPUElement) {
+      selectedGPUElement.classList.remove('selected');
+    }
+    selectedGPUElement = gpuElement;
+    selectedGPUElement.classList.add('selected');
+  }
+
+  function selectPower(powerElement) {
+    if (selectedPowerElement) {
+      selectedPowerElement.classList.remove('selected');
+    }
+    selectedPowerElement = powerElement;
+    selectedPowerElement.classList.add('selected');
+  }
+
+  // Function to send the selected GPU to the destination div
+  function sendSelectedGPU() {
+    var destinationDiv = document.getElementById('selectedGPU');
+    if (selectedGPUElement) {
+      destinationDiv.innerHTML = selectedGPUElement.innerHTML;
+    }
+  }
+
+  // Function to send the selected power supply to the destination div
+  function sendSelectedPower() {
+    var destinationDiv = document.getElementById('selectedPower');
+    if (selectedPowerElement) {
+      destinationDiv.innerHTML = selectedPowerElement.innerHTML;
+    }
+  }
+
+  var selectedCPUElement = null; // Variable to store the selected CPU element
+
+  // Function to handle CPU selection
+  function selectCPU(cpuElement) {
+    if (selectedCPUElement) {
+      selectedCPUElement.classList.remove('selected');
+    }
+    selectedCPUElement = cpuElement;
+    selectedCPUElement.classList.add('selected');
+  }
+
+  // Function to send the selected CPU to the destination div
+  function sendSelectedCPU() {
+    var destinationDiv = document.getElementById('selectedCPU');
+    if (selectedCPUElement) {
+      destinationDiv.innerHTML = selectedCPUElement.innerHTML;
+    }
+  }
+  var selectedMotherboardElement = null; // Variable to store the selected motherboard element
+
+  // Function to handle motherboard selection
+  function selectMotherboard(motherboardElement) {
+    if (selectedMotherboardElement) {
+      selectedMotherboardElement.classList.remove('selected');
+    }
+    selectedMotherboardElement = motherboardElement;
+    selectedMotherboardElement.classList.add('selected');
+  }
+
+  // Function to send the selected motherboard to the destination div
+  function sendSelectedMotherboard() {
+    var destinationDiv = document.getElementById('selectedMotherboard');
+    if (selectedMotherboardElement) {
+      destinationDiv.innerHTML = selectedMotherboardElement.innerHTML;
+    }
+  }
+
+  var selectedSSDElement = null; // Variable to store the selected SSD element
+
+  // Function to handle SSD selection
+  function selectSSD(ssdElement) {
+    if (selectedSSDElement) {
+      selectedSSDElement.classList.remove('selected');
+    }
+    selectedSSDElement = ssdElement;
+    selectedSSDElement.classList.add('selected');
+  }
+
+  // Function to send the selected SSD to the destination div
+  function sendSelectedSSD() {
+    var destinationDiv = document.getElementById('selectedSSD');
+    if (selectedSSDElement) {
+      destinationDiv.innerHTML = selectedSSDElement.innerHTML;
+    }
+  }
+
+
+
+
+  function addToCart(columnName) {
+    // Implement logic to add the clicked column name to the shopping cart
+    // You can use JavaScript arrays or any other data structure to store the selected items
+
+    // Example logic to add the column name to an array
+    var cartItems = []; // Array to store selected items
+    cartItems.push(columnName); // Add the clicked column name to the array
+
+    // You can perform any additional actions here, such as displaying a confirmation message or updating the UI
+
+    console.log(cartItems); // Output the cart items to the console (for testing)
+  }
+
+  $("#_service").click((e) => {
+    $(".popup_main").css({display:"block" });
+    $('.Part_popup').animate({ opacity: 1 });
+  });
+
+  $(".close").click((e) => {
+    $(".popup_main").css({display:"none" });
+    $('.Part_popup').animate({ opacity: 0 });
+  })
+
+
+  // 각 라벨별 선택 시 배경색 변경
+  var div2 = document.getElementsByClassName("btn1");
+
+  function handleClick(event) {
+    console.log(event.target);
+
+    console.log(event.target.classList);
+
+    if (event.target.classList[1] === "clicked") {
+      event.target.classList.remove("clicked");
+    } else {
+      for (var i = 0; i < div2.length; i++) {
+        div2[i].classList.remove("clicked");
+      }
+
+      event.target.classList.add("clicked");
+    }
+  }
+
+  function init() {
+    for (var i = 0; i < div2.length; i++) {
+      div2[i].addEventListener("click", handleClick);
+    }
+  }
+
+  init();
+
+  const addButton = document.getElementById('add_button');
+  const partList = document.querySelector('.part_list');
+
+  addButton.addEventListener('click', () => {
+    const selectedCpu = document.getElementById('cpu_dropdown').value;
+    if (selectedCpu !== '') {
+      const cpuElement = document.createElement('span');
+      cpuElement.classList.add('part');
+      cpuElement.textContent = selectedCpu;
+      partList.appendChild(cpuElement);
+    }
+  });
+
+
+
+
+  // Check if the username is set in the session and update the HTML accordingly
+  if ("${#httpSession.getAttribute('loginName2')}" !== "") {
+    document.getElementById("username").innerHTML = "${#httpSession.getAttribute('loginName2')}";
+  }else {
+    document.getElementById("username").innerHTML = "${#httpSession.getAttribute('loginName3')}";
+  }
+
+  //power , mainboard 호환성 검사
+  function checkCompatibility5() {
+    const power = document.getElementById("power_dropdown").value;
+    const motherboard = document.getElementById("mainboard_dropdown6").value;
+
+    if ( power === "Corsair RM850x" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+    } else if (power === "Corsair RM850x" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (power === "Corsair RM850x" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (power === "Corsair RM850x" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------G.Skill Ripjaws V 16GB DDR4 3600
+    } else if (power === "Seasonic Focus GX-750" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (power === "Seasonic Focus GX-750" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+    } else if (power === "Seasonic Focus GX-750" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (power === "Seasonic Focus GX-750" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------Crucial Ballistix 16GB DDR4 3200
+    } else if (power === "EVGA SuperNOVA 750 G3" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (power === "EVGA SuperNOVA 750 G3" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (power === "EVGA SuperNOVA 750 G3" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+
+    } else if (power === "EVGA SuperNOVA 750 G3" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------"Intel Core i5-11600K"
+
+    } else if (power === "be quiet! Straight Power 11 750W" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+    } else if (power === "be quiet! Straight Power 11 750W" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+    } else if (power === "be quiet! Straight Power 11 750W"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (power === "be quiet! Straight Power 11 750W"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+    }
+    else {
+      alert("둘 중 하나는 선택하셔야합니다.");
+    }
+  }
+  //gpu , mainboard 호환성 검사
+  function checkCompatibility4() {
+    const gpu = document.getElementById("gpu_dropdown").value;
+    const motherboard = document.getElementById("mainboard_dropdown5").value;
+
+    if ( gpu === "Nvidia GeForce RTX 3080" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+    } else if (gpu === "Nvidia GeForce RTX 3080" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (gpu === "Nvidia GeForce RTX 3080" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (gpu === "Nvidia GeForce RTX 3080" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------G.Skill Ripjaws V 16GB DDR4 3600
+    } else if (gpu === "Nvidia GeForce RTX 3070" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (gpu === "Nvidia GeForce RTX 3070" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+    } else if (gpu === "Nvidia GeForce RTX 3070" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (gpu === "Nvidia GeForce RTX 3070" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------Crucial Ballistix 16GB DDR4 3200
+    } else if (gpu === "Nvidia GeForce RTX 3060 Ti" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "Nvidia GeForce RTX 3060 Ti" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (gpu === "Nvidia GeForce RTX 3060 Ti" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+
+    } else if (gpu === "Nvidia GeForce RTX 3060 Ti" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------"Intel Core i5-11600K"
+
+    } else if (gpu === "AMD Radeon RX 6900 XT" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "AMD Radeon RX 6900 XT" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "AMD Radeon RX 6900 XT"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "AMD Radeon RX 6900 XT"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+    }
+    //---------
+  else if (gpu === "AMD Radeon RX 6800 XT" && motherboard === "GIGABYTE AORUS X570 Master") {
+    alert("호환이 가능합니다.");
+  } else if (gpu === "AMD Radeon RX 6800 XT" && motherboard === "ASRock B450M Pro4") {
+    alert("호환이 가능합니다.");
+  } else if (gpu === "AMD Radeon RX 6800 XT"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+    alert("호환이 가능합니다.");
+  } else if (gpu === "AMD Radeon RX 6800 XT"  && motherboard === "ASUS ROG Strix Z590-E") {
+    alert("호환이 가능합니다.");
+  }
+    //---------
+
+    else if (gpu === "AMD Radeon RX 6700 XT" && motherboard === "GIGABYTE AORUS X570 Master") {
+    alert("호환이 가능합니다.");
+  } else if (gpu === "AMD Radeon RX 6700 XT" && motherboard === "ASRock B450M Pro4") {
+    alert("호환이 가능합니다.");
+  } else if (gpu === "AMD Radeon RX 6700 XT"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+    alert("호환이 가능합니다.");
+  } else if (gpu === "AMD Radeon RX 6700 XT"  && motherboard === "ASUS ROG Strix Z590-E") {
+    alert("호환이 가능합니다.");
+
+      //---------
+
+    } else if (gpu === "Nvidia GeForce GTX 1660 Super" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "Nvidia GeForce GTX 1660 Super" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "Nvidia GeForce GTX 1660 Super"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "Nvidia GeForce GTX 1660 Super"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+    }
+    else if (gpu === "AMD Radeon RX 580" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "AMD Radeon RX 580" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "AMD Radeon RX 580"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (gpu === "AMD Radeon RX 580"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+    }
+    else {
+      alert("둘 중 하나는 선택하셔야합니다.");
+    }
+  }
+  //ssd, mainboard 호환성 검사
+  function checkCompatibility3() {
+    const ssd = document.getElementById("ssd_dropdown").value;
+    const motherboard = document.getElementById("mainboard_dropdown4").value;
+
+    if (ssd === "Samsung 970 EVO Plus" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+    } else if (ssd === "Samsung 970 EVO Plus" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (ssd === "Samsung 970 EVO Plus" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (ssd === "Samsung 970 EVO Plus" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------G.Skill Ripjaws V 16GB DDR4 3600
+    } else if (ssd === "WD Blue SN550" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (ssd === "WD Blue SN550" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+    } else if (ssd === "WD Blue SN550" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (ssd === "WD Blue SN550" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------Crucial Ballistix 16GB DDR4 3200
+    } else if (ssd === "Crucial MX500" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (ssd === "Crucial MX500" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (ssd === "Crucial MX500" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+
+    } else if (ssd === "Crucial MX500" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------"Intel Core i5-11600K"
+
+    } else if (ssd === "ADATA XPG SX8200 Pro" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+    } else if (ssd === "ADATA XPG SX8200 Pro" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+    } else if (ssd === "ADATA XPG SX8200 Pro"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (ssd === "ADATA XPG SX8200 Pro"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+    }
+    else {
+      alert("둘 중 하나는 선택하셔야합니다.");
+    }
+  }
+  //ram , mainboard 호환성 검사
+  function checkCompatibility2() {
+    const ram = document.getElementById("ram_dropdown").value;
+    const motherboard = document.getElementById("mainboard_dropdown3").value;
+
+    if (ram === "Corsair Vengeance LPX 16GB DDR4 3200" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+    } else if (ram === "Corsair Vengeance LPX 16GB DDR4 3200" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (ram === "Corsair Vengeance LPX 16GB DDR4 3200" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (ram === "Corsair Vengeance LPX 16GB DDR4 3200" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------G.Skill Ripjaws V 16GB DDR4 3600
+    } else if (ram === "G.Skill Ripjaws V 16GB DDR4 3600" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (ram === "G.Skill Ripjaws V 16GB DDR4 3600" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+    } else if (ram === "G.Skill Ripjaws V 16GB DDR4 3600" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (ram === "G.Skill Ripjaws V 16GB DDR4 3600" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능하지만 업그레이드가 가능합니다.");
+
+      //---------------------------------Crucial Ballistix 16GB DDR4 3200
+    } else if (ram === "Crucial Ballistix 16GB DDR4 3200" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (ram === "Crucial Ballistix 16GB DDR4 3200" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (ram === "Crucial Ballistix 16GB DDR4 3200" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+
+
+    } else if (ram === "Crucial Ballistix 16GB DDR4 3200" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------"Intel Core i5-11600K"
+
+    } else if (ram === "Kingston HyperX Fury 16GB DDR4 3200" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+    } else if (ram === "Kingston HyperX Fury 16GB DDR4 3200" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+    } else if (ram === "Kingston HyperX Fury 16GB DDR4 3200"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (ram === "Kingston HyperX Fury 16GB DDR4 3200"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+    // --------------------Team T-FORCE DARK Za 16GB DDR4 3600
+    } else if (ram === "Team T-FORCE DARK Za 16GB DDR4 3600" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능하지만 업그레이드가 가능합니다.");
+    } else if (ram === "Team T-FORCE DARK Za 16GB DDR4 3600" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능하지만 업그레이드가 가능합니다.");
+    } else if (ram === "Team T-FORCE DARK Za 16GB DDR4 3600" && motherboard === "ASRock B450M Pro4") {
+      alert("완전히 호환이 되지 않을 수 있습니다.");
+    } else if (ram === "Team T-FORCE DARK Za 16GB DDR4 3600"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    }
+    else {
+      alert("둘 중 하나는 선택하셔야합니다.");
+    }
+  }
+
+  //cpu , mainborad 호환성 검사
+  function checkCompatibility() {
+    const cpu = document.getElementById("cpu_dropdown").value;
+    const motherboard = document.getElementById("mainboard_dropdown2").value;
+
+    if (cpu === "Intel Core i9-11900K" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+
+    } else if (cpu === "Intel Core i9-11900K" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 불가능합니다.");
+
+    } else if (cpu === "Intel Core i9-11900K" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 불가능합니다.");
+
+    } else if (cpu === "Intel Core i9-11900K" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+
+    //---------------------------------AMD Ryzen 9 5950X
+      } else if (cpu === "AMD Ryzen 9 5950X" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (cpu === "AMD Ryzen 9 5950X" && motherboard === "ASUS ROG Strix Z590-E") {
+        alert("호환이 불가능합니다.");
+
+    } else if (cpu === "AMD Ryzen 9 5950X" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+
+    } else if (cpu === "AMD Ryzen 9 5950X" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+
+      //---------------------------------"Intel Core i7-11700K"
+    } else if (cpu === "Intel Core i7-11700K" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 불가능합니다.");
+    } else if (cpu === "Intel Core i7-11700K" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+    } else if (cpu === "Intel Core i7-11700K" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+
+
+    } else if (cpu === "Intel Core i7-11700K" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+
+
+      //---------------------------------"AMD Ryzen 7 5800X"
+    } else if (cpu === "AMD Ryzen 7 5800X" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+    } else if (cpu === "AMD Ryzen 7 5800X"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (cpu === "AMD Ryzen 7 5800X"  && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+    } else if (cpu === "AMD Ryzen 7 5800X"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+
+
+      //---------------------------------"Intel Core i5-11600K"
+
+    } else if (cpu === "Intel Core i5-11600K" && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("메인보드가 AMD전용으로 호환이 불가능합니다.");
+    } else if (cpu === "Intel Core i5-11600K" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+      } else if (cpu === "Intel Core i5-11600K"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 불가능합니다.");
+    } else if (cpu === "Intel Core i5-11600K"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("메인보드가 Intel전용으로 호환이 가능합니다.");
+
+      //---------------------------------"AMD Ryzen 5 5600X"
+    } else if (cpu === "AMD Ryzen 5 5600X" && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 불가능합니다.");
+    } else if (cpu === "AMD Ryzen 5 5600X" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+    } else if (cpu === "AMD Ryzen 5 5600X"  && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능합니다.");
+    } else if (cpu === "AMD Ryzen 5 5600X"  && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+
+      //---------------------------------"Intel Core i3-10100"
+
+    } else if (cpu === "Intel Core i3-10100" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 불가능합니다.");
+    } else if (cpu === "Intel Core i3-10100"  && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 불가능합니다.");
+    } else if (cpu === "Intel Core i3-10100"  && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 불가능합니다.");
+    } else if (cpu === "Intel Core i3-10100"   && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+
+      //---------------------------------"AMD Ryzen 3 3300X"
+    } else if (cpu === "AMD Ryzen 3 3300X" && motherboard === "ASRock B450M Pro4") {
+      alert("호환이 가능합니다.");
+    } else if (cpu === "AMD Ryzen 3 3300X" && motherboard === "MSI MPG B550 Gaming Edge WiFi") {
+      alert("호환이 가능하지만 BIOS업데이트가 필요합니다.");
+    } else if (cpu === "AMD Ryzen 3 3300X"  && motherboard === "GIGABYTE AORUS X570 Master") {
+      alert("호환이 가능합니다.");
+    } else if (cpu === "AMD Ryzen 3 3300X"  && motherboard === "ASUS ROG Strix Z590-E") {
+      alert("호환이 가능합니다.");
+    } else {
+      alert("둘 중 하나는 선택하셔야합니다.");
+    }
+  }
+  //cpu
+  var cpuList = [
+    "Intel Core i9-11900K",
+    "AMD Ryzen 9 5950X",
+    "Intel Core i7-11700K",
+    "AMD Ryzen 7 5800X",
+    "Intel Core i5-11600K",
+    "AMD Ryzen 5 5600X",
+    "Intel Core i3-10100",
+    "AMD Ryzen 3 3300X"
+  ];
+  var cpuDropdown = document.getElementById("cpu_dropdown");
+
+  // Loop through the CPU list and create an option element for each one
+  for (var i = 0; i < cpuList.length; i++) {
+    var option = document.createElement("option");
+    option.value = cpuList[i];
+    option.text = cpuList[i];
+    cpuDropdown.appendChild(option);
+  }
+
+</script>
+
+</html>

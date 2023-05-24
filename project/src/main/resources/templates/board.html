@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/board.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src = "/js/main.js" ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <a href="/AfterMain"><img class ="logoimg"src="/img/logo.png"></a>
+        </div>
+    </div>
+</header>
+<div class="user-info-box">
+    <h2></h2>
+    <p><strong>사용자 정보 </strong></p><p th:text="${session.loginName3}"></p>
+    <p th:text="${session.loginName2}"></p>
+    <p th:text="${session.loginName}"></p>
+    <button class="logout-button"><a href="/session/logout">로그아웃</a>
+    </button>
+</div>
+<!-- 게시판 -->
+
+<section class="notice">
+    <div class="page-title">
+        <div class="container">
+            <h3>견적 요청</h3>
+        </div>
+    </div>
+
+    <!-- board seach area -->
+    <div id="board-search">
+        <div class="container">
+            <div class="search-window">
+                <form th:action="@{/board}" method="get">
+                    <div class="search-wrap">
+                        <label for="search" class="blind">공지사항 내용 검색</label>
+                        <input id="search" type="search" name="seachKeyword" placeholder="검색어를 입력해주세요." value="">
+                        <button type="submit" class="btn btn-dark">검색</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-num">번호</th>
+                    <th scope="col" class="th-title">제목</th>
+                    <th scope="col" class="th-date">등록일</th>
+                </tr>
+                </thead>
+                <tbody>
+                        <tr th:each="board : ${list.content}">
+                            <td th:text="${board.id}"></td>
+                            <td>
+                                <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
+                            </td>
+                            <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-light" id="write-post-btn"><a href="/board/write">글 작성</a></button>
+    </div>
+
+</section>
+
+
+<script src="../../../../../../../Downloads/table-06/js/jquery.min.js"></script>
+<script src="../../../../../../../Downloads/table-06/js/popper.js"></script>
+<script src="../../../../../../../Downloads/table-06/js/bootstrap.min.js"></script>
+<script src="../../../../../../../Downloads/table-06/js/main.js"></script>
+
+<footer style="background-color: black; color: white; padding: 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>인하공업전문대학</h4>
+                <p>3학년 A반 재학중</p>
+            </div>
+            <div class="col-md-4">
+                <h4>쇼핑몰</h4>
+                <p>3학년 1학기 프로젝트</p>
+            </div>
+            <div class="col-md-4">
+                <h4>연락처</h4>
+                <p>22212<br>인천광역시 미추홀구 인하로100<br>대표전화: 032-870-2114<br>이메일: sangmin5848@naver.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>

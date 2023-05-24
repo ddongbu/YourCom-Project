@@ -1,0 +1,440 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.input {
+  display: none;
+} 
+
+body {
+	margin : 0;
+	padding: 0;
+	position: relative;
+	/* overflow: hidden; */
+} 
+
+header {
+  width: 100%;
+  height: 80px;
+/*   border: 2px solid #E0E0E0; */
+}
+
+.container {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+header .logoimg {
+  position: absolute;
+  left: 20px;
+  width: 250px;
+  height: 70px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  display: inline-block;
+}
+header > div > .logo {
+  width: 20%;
+  height: 80px;
+  float: left;
+}
+header > div > .logo > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  text-align: center;
+  font-size: 60px;
+  line-height: 80px;
+  text-decoration: none;
+}
+
+header > div > ul {
+  width: 80%;
+  height: 80px;
+  font-weight: 400;
+  text-align: right;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+
+header > div > ul > li {
+  color: #606060;
+  font-weight: 400;
+  display: inline-block;
+  font-size: 25px;
+  padding: 20px;
+  text-shadow: 2px 2px 2px gray;
+}
+
+header > div > ul > li:hover {
+	color: skyblue;
+}
+
+/* View */
+
+#View {
+  width: 100%;
+}
+video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+}
+#item_box2 {
+    width: 100%;
+    height: 700px;
+    background-color: #E0E0E0;
+}
+
+/* item_box */
+#item_box {
+  width: 100%;
+  height: 700px;
+  background-color: #E0E0E0;
+}
+
+#item_box > div > .grow {
+  width: 100%;
+  height: 700px;
+}
+
+#item_box > div > .grow > .title {
+  width: 100%;
+  height: 10%;
+  position: relative;
+  margin-top: 60px;
+}
+
+#item_box > div > .grow > .title > h1 {
+  text-align: center;
+  line-height: 70px;
+  font-size:30px;
+  color: #000000;
+  /*border: 1px solid #E0E0E0;*/
+  background-color: #FFFFFF;
+  text-shadow: 3px 3px 3px gray;
+}
+
+#item_box > div > .grow > .title > button {
+  width: 80px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+
+#item_box > div > .grow > .slide_box {
+  width: 100%;
+  height: 80%;
+  background-color: #FFFFFF;
+}
+
+#item_box > div > .grow > .slide_box > ul {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+#item_box > div > .grow > .slide_box > ul > li {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 350px;
+  transition: 1s;
+}
+#item_box > div > .grow > .slide_box > ul > li:nth-of-type(1) {
+  background-color: rgba(245, 245, 247);
+  border-radius: 2em;
+  box-shadow: 2px 2px 2px 2px gray;
+}
+#item_box > div > .grow > .slide_box > ul > li:nth-of-type(2) {
+  background-color: rgba(0, 0, 0);
+  border-radius: 2em;
+  color: white;
+  box-shadow: 2px 2px 2px 2px gray;
+}
+#item_box > div > .grow > .slide_box > ul > li:nth-of-type(3) {
+  background-color: rgba(255, 255, 255);
+  border-radius: 2em;
+  box-shadow: 2px 2px 2px 2px gray;
+}
+
+#item_box > div > .grow > .slide_box > ul > li:nth-of-type(4) {
+  background-color: rgba(245, 245, 247);
+  border-radius: 2em;
+  box-shadow: 2px 2px 2px 2px gray;
+}
+
+#item_box > div > .grow > .slide_box > ul > li > label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 30px;
+}
+
+
+#item_box > div > .grow > .slide_box > ul > li:nth-of-type(2) {
+  width: 280px;
+  height: 350px;
+  left: 77%;
+  color: white;
+  background-color: rgba(0, 0, 0);
+}
+#item_box > div > .grow > .slide_box > ul > li:nth-of-type(3) {
+  width: 280px;
+  height: 350px;
+  left: 104%;
+  background-color: rgba(255, 255, 255);
+}
+#item_box > div > .grow > .slide_box > ul > li:nth-of-type(4) {
+  width: 280px;
+  height: 350px;
+  left: 111%;
+  background-color: rgba(245, 245, 247);
+}
+
+#slide1:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(1) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 350px;
+}
+
+#slide1:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(2) {
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 350px;
+}
+
+#slide1:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(3) {
+  position: absolute;
+  top: 50%;
+  left: 111%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 350px;
+}
+
+
+#slide2:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(1) {
+  width: 280px;
+  height: 350px;
+  left: 20%;
+}
+#slide2:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(2) {
+  left: 50%;
+  width: 280px;
+  height: 350px;
+}
+#slide2:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(3) {
+  left: 80%;
+  width: 280px;
+  height: 350px;
+}
+
+#slide3:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(1) {
+  width: 280px;
+  height: 350px;
+  left: -20%;
+}
+#slide3:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(2) {
+  left: 20%;
+  width: 280px;
+  height: 350px;
+}
+#slide3:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(3) {
+  left: 50%;
+  width: 280px;
+  height: 350px;
+}
+
+#slide3:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(4) {
+  left: 80%;
+  width: 280px;
+  height: 350px;
+}
+
+#slide4:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(1) {
+  left: -20%;
+  width: 280px;
+  height: 350px;
+}
+
+#slide4:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(2) {
+  left: -20%;
+  width: 280px;
+  height: 350px;
+}
+#slide4:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(3) {
+  left: 20%;
+  width: 280px;
+  height: 350px;
+}
+
+#slide4:checked ~ #item_box > div > .grow > .slide_box > ul > li:nth-of-type(4) {
+  left: 50%;
+  width: 280px;
+  height: 350px;
+}
+
+
+.popup_main {
+	width:100%;
+	height:100vh;
+	background-color:rgba(0,0,0,0.8);
+	position:absolute;
+	top:0%; 
+	display:none;
+}
+
+.popup_main > .Part_popup {
+	width:50%;
+	height:600px;
+	background-color: #fff;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%); 
+	border-radius:10px;
+	opacity: 0;
+}
+
+.popup_main > .Part_popup > h1 {
+	text-align: center;
+	background-color: #fff;
+	color:#000;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	position: relative;
+	margin:10px;
+}
+
+.popup_main > .Part_popup > h1 > span {
+	position:absolute;
+	top:15%;
+	right:3%;
+	font-size:25px;
+}
+
+.popup_main > .Part_popup > .btn_box {
+	width:100%;
+	height:60px;
+	padding: 0px 10px;
+	margin-top: 10px;
+}
+
+.popup_main > .Part_popup > .btn_box > label {
+/* 	margin-left: 25px; */
+	display: block;
+	width: 100px;
+	height: 50px;
+	float:left;
+	text-align: center;
+	line-height: 50px;
+	margin-top: 10px;
+	margin-right: 10px;
+	border-top-right-radius: 10px;
+}
+
+
+.popup_main > .Part_popup > .info {
+	width: 100%;
+	height:478px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	position:absolute;
+	bottom:0%;
+	overflow-y: scroll;
+	display:none;
+	padding: 0px 10px;
+}
+
+.popup_main > .Part_popup > .info > p {
+	font-size: 15px;
+	border: 1px solid #000;
+}
+
+#part1:checked ~ .popup_main > .Part_popup > .m_CPU {
+	display:block;
+}
+
+#part1:checked ~ .popup_main > .Part_popup > .btn_box > label:nth-of-type(1) {
+	background-color: #000000;
+    color: white;
+    font-weight: bold;
+}
+
+#part2:checked ~ .popup_main > .Part_popup > .m_RAM {
+	display:block;
+}
+
+#part3:checked ~ .popup_main > .Part_popup > .m_SSD {
+	display:block;
+}
+
+#part4:checked ~ .popup_main > .Part_popup > .m_Mainboard {
+	display:block;
+}
+
+#part5:checked ~ .popup_main > .Part_popup > .m_GPU {
+	display:block;
+}
+
+#part6:checked ~ .popup_main > .Part_popup > .m_PWR {
+	display:block;
+}
+
+.clicked {
+	background-color: #000000;
+    color: white;
+    font-weight: bold;
+}
+
+#machinecbtn{
+    display: flex;
+}
+#hidden-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#hidden-menu li {
+    margin: 10px;
+}
+
+#hidden-menu li a {
+    text-decoration: none;
+    color: #333;
+}
+.cpupart_list {
+    /* Your CSS styles for the .part_list class */
+    /* For example: */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.part_list li:before {
+    content: "\2022"; /* Bullet point character */
+    margin-right: 5px;
+}

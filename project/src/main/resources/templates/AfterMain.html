@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src = "/js/main.js" ></script>
+</head>
+<body>
+<input type="radio" class="input" name="slide" id="slide1" checked>
+<input type="radio" class="input" name="slide" id="slide2">
+<input type="radio" class="input" name="slide" id="slide3">
+<input type="radio" class="input" name="slide" id="slide4">
+
+
+<input type="radio" class="input" name="p_btn" id="part1" checked>
+<input type="radio" class="input" name="p_btn" id="part2">
+<input type="radio" class="input" name="p_btn" id="part3">
+<input type="radio" class="input" name="p_btn" id="part4">
+<input type="radio" class="input" name="p_btn" id="part5">
+<input type="radio" class="input" name="p_btn" id="part6">
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <a href="/AfterMain"><img class ="logoimg"src="/img/logo.png"></a>
+    </div>
+    <ul>
+      <li id="_service" class="_service">부품 설명</li>
+      <li id="_select_com" class="_select_com">
+        <a href="/estimate">부품 선택</a>
+      </li>
+      <li id="_boardcom" class="_select_com">
+        <a href="/board">견적요청</a>
+      </li>
+      <li id="_logout" class="_logout">
+        <a href="/session/logout">로그아웃</a>
+      </li>
+      <li id="_user" class="_user">
+        <p th:text="${session.loginName3}">Nice to meet you!</p>
+        <p th:text="${session.loginName2}">님 반갑습니다!</p>
+        <p th:text="${session.loginName}">님 반갑습니다!</p>
+      </li>
+    </ul>
+  </div>
+</header>
+<!-- 메인 페이지 -->
+<section id="item_box">
+  <div class="container">
+    <div class="grow">
+      <div class="title">
+        <h1></h1>
+      </div>
+      <div class="slide_box">
+        <ul>
+              <video autoplay muted loop>
+                <source src="/video/video.mp4" type="video/mp4">
+              </video>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="item_box">
+  <div class="container">
+    <div class="grow">
+      <div class="title">
+        <h1>사양별 PC 추천</h1>
+      </div>
+      <div class="slide_box">
+        <ul>
+          <li>
+            <label for="slide1" style="text-align: center;"><br><h1>인터넷/사무용 PC</h1><br>
+              CPU : i3-10105F<br>
+              MainBoard : h55<br>
+              GPU : GeForce GT710 D3<br>
+              RAM : 4GB<br>
+              SSD : 128GB<br>
+              POWER : 클래식 III 400W<br></label>
+          </li>
+          <li>
+            <label for="slide2" style="text-align: center;"><br><h1>국민 옵션 PC</h1><br>
+              CPU : i5-10400F<br>
+              MainBoard : H510M-A 프로<br>
+              GPU : GeForce GTX1660 슈퍼<br>
+              RAM : 8GB<br>
+              SSD : 256GB<br>
+              POWER : Focus Gold 500W<br></label>
+          </li>
+          <li>
+            <label for="slide3" style="text-align: center;"><br><h1>게이밍 PC</h1><br>
+              CPU : i5-12400F<br>
+              MainBoard : MSI PRO B660M-A<br>
+              GPU : GeForce RTX 3060<br>
+              RAM : 16GB(8GB x 2)<br>
+              SSD : 512GB<br>
+              POWER : Antec CSK 650W<br></label>
+          </li>
+          <li>
+            <label for="slide4" style="text-align: center;"><br><h1>하이엔드 PC</h1><br>
+              CPU : i9-13900K<br>
+              MainBoard : MSI MEG Z690 에이스<br>
+              GPU : MSI 지포스 RTX 4090<br>
+              RAM : 128GB(32GB x 4)<br>
+              SSD : 삼성전자 980 PRO 2TB<br>
+              POWER : 시소닉 PRIME TITANIUM 1600W<br></label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 부품 설명 모달창 -->
+<div class="popup_main">
+  <div class="Part_popup">
+    <h1>
+      부품별 소개 <span class="close">✖️</span>
+    </h1>
+    <div class="btn_box">
+      <label class="btn1" for="part1">CPU</label>
+      <label class="btn1" for="part2">RAM</label>
+      <label class="btn1" for="part3">SSD</label>
+      <label class="btn1" for="part4">MainBoard</label>
+      <label class="btn1" for="part5">GPU</label>
+      <label class="btn1" for="part6">PWR</label>
+    </div>
+    <div class="info m_CPU">
+      <p>
+        CPU는 중앙처리 장치로서 Center Processor Unit의 약자입니다.<br>
+        <br> [사전적 의미]<br> CPU는 뇌와 같은 역할을 하며 사용자로부터 입력 받은 명령어를 해석,
+        <br> 연산 한 후 그 결과를 출력하는 역할을 한다. 그리고 이렇게 하나의 부품에 연산장치, <br>
+        해독 장치, 제어 장치 등이 접적되어 있는 형태를 일컬어 '마이크로 프로세서'라고 한다<br> CPU는 출시된
+        년도 별로 소켓의 수가 달라지며 메인보드에 장착할 때 메인보드와 같은<br> 소켓의 메인보드와 사용해야 한다.
+        <br> <br> [현실]<br> 게임용 PC 혹은 워크스테이션 등 GPU의 뒤를 이어
+        2번째로 높은 가격을 자랑하는 CPU는 <br> 매해 새로운 제품이 나옵니다.<br> CPU를 만드는
+        회사는 주로 Intel, AMD 두 회사이며 각자 다른 장단점을 갖고 있어 PC조립시<br> 본인에게 적합한
+        CPU 제품을 고르셔야 합니다.<br> <br> Intel : 단일 프로세서의 처리속도와 안정성이
+        뛰어나며, 가상화 기능이 포함되어 있습니다.<br> 또한 몇몇 모델을 제외하고는 그래픽 카드를 장착하지 않아도
+        되며 각종 드라이버의 안정성 및 <br> 호환성이 뛰어납니다.<br> 인터페이스의 유리함도 갖고
+        있습니다.<br> 인텔은 완벽하게 썬더볼트를 지원하여 썬더볼트 인터페이스를 활용한 기기간 연결, 혹은 전력 충전<br>
+        이 가능합니다. <br> 단점으로는 AMD CPU보다 비싸다는 단점이있습니다. <br>
+        <br> AMD : 떠오르는 강자로 코어의 수를 동급 대비 Intel CPU보다 많이 가지고 있어 멀티코어
+        프로세서를<br> 이용하는 프로그램에서 강점을 가집니다. 또한 가격이 동급 Intel대비 굉장히 저렴하다는
+        장점이 있습니다.<br> <br> 단점으로는 드라이버의 호완성 문제로 프로그램 실행에 있어 안정성이
+        떨어지며, 부분적 썬더볼트 지원으로<br> 인해 썬더볼트 인터페이스를 잘 활용할 수 없다는 것이 단점입니다.<br><br>
+      </p>
+    </div>
+    <div class="info m_RAM">
+      <p>
+        RAM은 Random Access Memory의 약자이며, CPU가 처리하는 데이터들의 임시저장소로 사용되고 있다.<br>
+        <br> [사전적 의미]<br> 기억된 정보를 읽어내기도 하고 다른 정보를 기억시킬 수도 있는
+        메모리로서, 컴퓨터의 주기억장치,<br> 응용 프로그램의 일시적 로딩(loading), 데이터의 일시적 저장
+        등에 사용된다. <br> <br> [현실]<br> 램은 마치 포스트잇과 같습니다. 우리들이
+        일을 할 때 잠시 옆에 적어두고 다른일을 하듯<br> CPU도 동시 작업을 하기위해 램에 저장해두고 읽고 쓰기를
+        반복합니다.<br> 때문에 '다다익램'이라는 단어가 탄생할 정도로 램의 크기, 용량은 중요합니다.<br>
+        램은 딱 3가지만 구분하면 됩니다. 용량, 속도, 규격<br> <br> <br> [용량]<br>
+        기술이 발전하면서 RAM의 용량은 기하급수적으로 늘어났으며, 8GB부터 16GB 최근에는 32GB램도<br>
+        출시예정입니다. RAM의 용량에 따라 동시 작업처리할 수 있는 양이 늘어납니다.<BR> <br>
+        [속도]<br> RAM은 규격별로 속도가 상이합니다. DDR4 기준으로 2400Mhz 즉, 2.4Ghz 속도가
+        평균이며, <br> 최근에 나온 DDR5는 4.8Ghz 속도를 갖고 있습니다. <br><br> [규격]<br>
+        규격으로는 DDR 규격을 갖습니다. DDR은 Double Date Rate의 약자이며, 현재 DDR4가 표준<BR>
+        DDR5가 최신 제품으로 조명받고 있습니다.<br> 컴퓨터 조립시 RAM은 메인보드에 장착되는데 메인보드의
+        DDR소켓이 사용자의 RAM 소켓과 동일해야하며<br> 상이할 시 장착이 되지 않거나 무리하게 장착할 경우
+        메모리와 메인보드에 심각한 고장을 불러올 수 있습니다. <br><br>
+      </p>
+    </div>
+    <div class="info m_SSD">
+      <p>
+        <br> [사전적 의미]<br> Solid State Drive의 약자이다. SSD는 비휘발성
+        메모리로서 빠른 읽기속도와 쓰기속도로 <br> 하드디스크를 뒤이을 차세대 저장장치로 사용되고 있다. <br>
+        <br> [현실]<br>높은 가격. 하드디스크 '플래터'라고 불리는 자석의 성질을 가진 딱딱한
+        원반이 <br> 여러 장 들어 있는데, 이곳에 자기로 데이터가 저장이 됨으로 가격이 싸다는 것이<br>
+        장점인것과 반대로 특정 데이터를 찾을때 플래터를 전부 읽어서 찾고자 하는 데이터가<br> 읽어질때 까지 플래터를
+        읽어야하기 때문에 느리다는 것이 단점이다.<br> 때문에 비 휘발성 플래시 메모리에 데이터가 저장되는 SSD가
+        각광받고 있다.<br> 빠른 속도의 플래시 메모리는 컴퓨터의 시스템을 저장하기에 적절하다.
+      </p>
+    </div>
+    <div class="info m_HDD">
+      <p>
+        <br> [사전적 의미]<br> Solid State Drive의 약자이다. SSD는 비휘발성
+        메모리로서 빠른 읽기속도와 쓰기속도로 <br> 하드디스크를 뒤이을 차세대 저장장치로 사용되고 있다. <br>
+        <br> [현실]<br> 너무 비싸다. 하드디스크 '플래터'라고 불리는 자석의 성질을 가진 딱딱한
+        원반이 <br> 여러 장 들어 있는데, 이곳에 자기로 데이터가 저장이 됨으로 가격이 싸다는 것이<br>
+        장점인것과 반대로 특정 데이터를 찾을때 플래터를 전부 읽어서 찾고자 하는 데이터가<br> 읽어질때 까지 플래터를
+        읽어야하기 때문에 느리다는 것이 단점이다.<br> 때문에 비 휘발성 플래시 메모리에 데이터가 저장되는 SSD가
+        각광받고 있다.<br> 빠른 속도의 플래시 메모리는 컴퓨터의 시스템을 저장하기에 적절하다.
+      </p>
+    </div>
+    <div class="info m_Mainboard">
+      <p>
+        메인보드는 컴퓨터 부품 장치중 여러 부품을 하나로 통합는 부품으로 외국에서는<br> 여러 부품들을 품는다고 해서
+        마더 보드(MotherBoard)라고 부른다.<br> 메인보드는 CPU, RAM, GPU, SSD 외에 각종
+        쿨러 등 각 부품별로 세대별 규격에<br> 맞게 장착 가능하고 세대별 규격과 다르게 장착시에는 장착이 불가능
+        하거나, <br> 장치에 고장을 불러일으킬 수 있다. <br> <br> [현실]<br>
+        메인보드는 각종 장치를 연결해주는 판으로써 주로 CPU와 GPU, RAM, SSD을 연결해줍니다.<br> 각종
+        부품별로 세대별 소켓 규격이 정해져 있으며, RAM을 예시로 DDR시리즈 뒤에 숫자가 <br> 붙습니다.
+        DDR4규격의 RAM은 DDR4 규격의 메인보드에만 장착할 수 있으며 다른 소켓의CPU를<br> 장착할 경우
+        CPU가 파손되거나 메인보드가 파손될 수 있습니다. <br> <br>
+
+
+      </p>
+    </div>
+    <div class="info m_GPU">
+      <p>
+        GPU는 그래픽을 담당하는 유닛으로 Graphics Processor Unit의 약자입니다.<br>
+        <br> [사전적 의미]<br> GPU는 CPU를 대신하여 그래픽 연산 처리를 담당하는 부품으로,
+        연산결과를<br> 그림이나 텍스트 신호로 변환하여 모니터에 출력해주는 어답터와 같은 부품으로 인식되고 있다.<br>
+        뿐만 아니라 게임이나 3D작업, 멀티미디어들이 점차 발전하기 시작하면서 고도의 그래픽처리를<br> 전용으로
+        담당하는 프로세서 유닛을 말한다. <br> <br> [현실]<br> 작업용 워크스테이션 및
+        게이밍 전용 컴퓨터 기준 모든 부품을 제치고 제일 높은 가격을 자랑하는<br> GPU(이하 그래픽카드)는 현재를
+        살면서 PC시장에서 빠질 수 없는 부품으로 자리 잡고 있습니다.<br> 과거에는 CPU가 그래픽 연산을 겸해
+        그래픽 처리에 할당되는 연산처리 능력을 대신하기 위해 <br> 그래픽 카드를 사용하였다면, 현재 일상에서는
+        유투브 및 4k 영화 시청, 게임, 멀리는 캐드 및 딥머신러닝<br> 등과 같이 오로지 고도의 그래픽 처리를
+        위해 필수로 장착되는 것이 그래픽 카드입니다. 그래픽 카드는 nVIDIA 와 AMD 두 회사가 양각을 이루며 최근
+        Intel 에서도 가성비 그래픽카드를 <br> 출시하며 3자 구도를 형성하였습니다. <br> <br>
+        nVIDIA : 정통적인 그래픽 카드 회사로 GeForce 시리즈를 출시하고 있다. 게이밍에 사용되지만, <br>
+        영상 편집 및 미디어 편집, 3D 모델링 더 나이가 인공지능 학습 개발에도 사용되고 있다. <br> 영상과
+        게임에서 빛의 방향에 따라 그림자 처리나 윤곽 처리를 전용으로 하는 레이트레이싱 유닛을 <br> 포함하고 있다.
+        <br> 단점으로는 다른 회사의 제품보다 비싸고, 최근 유닛의 발열처리 문제가 발생하며 이러한 문제에 <br>
+        대처가 미숙하다는 점이다. <br>
+        <br> AMD : nVIDIA의 뒤를 잇는 그래픽 카드로 nVIDIA 동급모델보다 저럼하다는 장점을 갖고
+        있으며<br> 더 이상 장점은 없다. <br> 단점으로는 드라이버의 호완성 문제로 프로그램 실행에 있어
+        안정성이 떨어지며 이로인해 작업<br> 도중에 프로그램이 정지 되거나 작업물이 제대로 렌더링 되지 않아 결과물에
+        지장을 줄 수 있다. <br>
+        <br> Intel : 최근 AMD를 뒤이어 2인자를 노리는 회사로 기존 보급형 그래픽 카드 시장을 장악하기<br>
+        위해 저렴한 가격의 보급형 신제품을 출시하고 있다. 기존 CPU영역에서의 호완성을 보장하기 때문에 그래픽 카드에서 <br>
+        단점으로는 그래픽 카드 시장 진출 새내기라 제품에 대한 안정성과 문제점이 발견되지 않아<br> 사용자가 제품
+        테스터가 될 수 있다.<br><br>
+
+      </p>
+    </div>
+    <div class="info m_PWR">
+      <p>
+        [사전적 의미]<br> 컴퓨터에 전력을 공급하는 부품으로서 컴퓨터의 안정성을 결정짓는 중요한 역할을 합니다.<br>
+        높은 성능의 CPU나 그래픽카드는 더 많은 전력을 소비하므로 고용량 파워가 필요하며, <br> 일반사무용이나
+        저사양 PC에는 저용량 파워도 구동에 문제가 없습니다. 다만, 단순 표기된<br> 용량이 중요하기보다는 얼마나
+        정확하고 일정한 전력을 공급하는지가 더 중요합니다. <br> 컴퓨터의 성능과 사용용도에 따라 제품을 선택하는
+        것이 좋습니다. <br> <br> [현실]<br> 잘 어루고 달래줘야할 부품입니다.<br>
+        파워 서플라이는 본인이 마음에 들지 않을 경우 터지는 습성을 갖고 있으며 <br> 이때 혼자 가지 않고 다른
+        부품과 함께 고장을 불러내 컴퓨터를 아는 사람들 사이에서<br> 물귀신 작전에 당했다 라고도 표현하고 있습니다.<br>
+        정확히는 전력을 저장하기 위한 콘덴서의 수준에 따라 파워 서플라이가 공급할 수 있는<br> 전력의 양이 정해지며
+        '정격 용량' 이라고 부르고 있습니다.<br> 실제로는 표기용량과 함께 표시가 되는데, 표기 용량은 이론적으로
+        회사가 설계한 용량을<br> 의미하며 정격용량은 실제로 테스트시 발열 및 공급 용량에 따라 인증받은 양을
+        의미합니다.<br> 콘덴서에 과전압이 흐르게 되면 콘덴서는 터지게 되며 자동으로 전력이 차단되게 됩니다.<br>
+        이때 저가 파워의 경우 비상 콘덴서(과전압으로 폭파시 해단 전압을 받아줄 콘덴서)의 수준<br> 이 낮아
+        과전압을 그대로 본체 시스템으로 끌고올 수 있으며 이때 메인보드에 붙어있는 다양한<br> 부품들도 과전압 상태로
+        접어들어 부품 고장을 일으킬 수 있습니다.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $("#_service").click((e) => {
+    $(".popup_main").css({display:"block" });
+    $('.Part_popup').animate({ opacity: 1 });
+  });
+
+  $(".close").click((e) => {
+    $(".popup_main").css({display:"none" });
+    $('.Part_popup').animate({ opacity: 0 });
+  })
+
+
+  // 각 라벨별 선택 시 배경색 변경
+  var div2 = document.getElementsByClassName("btn1");
+
+  function handleClick(event) {
+    console.log(event.target);
+
+    console.log(event.target.classList);
+
+    if (event.target.classList[1] === "clicked") {
+      event.target.classList.remove("clicked");
+    } else {
+      for (var i = 0; i < div2.length; i++) {
+        div2[i].classList.remove("clicked");
+      }
+
+      event.target.classList.add("clicked");
+    }
+  }
+
+  function init() {
+    for (var i = 0; i < div2.length; i++) {
+      div2[i].addEventListener("click", handleClick);
+    }
+  }
+
+  init();
+
+
+
+  // Check if the username is set in the session and update the HTML accordingly
+  if ("${#httpSession.getAttribute('loginName2')}" !== "") {
+    document.getElementById("username").innerHTML = "${#httpSession.getAttribute('loginName2')}";
+  }else {
+    document.getElementById("username").innerHTML = "${#httpSession.getAttribute('loginName3')}";
+  }
+
+    //더보기 기능
+  $(document).ready(function() {
+    $('._more').click(function() {
+      $(this).toggleClass('active');
+      $(this).find('.dropdown-menu').slideToggle();
+    });
+  });
+
+</script>
+
+<footer style="background-color: black; color: white; padding: 20px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h4>인하공업전문대학</h4>
+        <p>3학년 A반 재학중</p>
+      </div>
+      <div class="col-md-4">
+        <h4>쇼핑몰</h4>
+        <p>3학년 1학기 프로젝트</p>
+      </div>
+      <div class="col-md-4">
+        <h4>연락처</h4>
+        <p>22212<br>인천광역시 미추홀구 인하로100<br>대표전화: 032-870-2114<br>이메일: sangmin5848@naver.com</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+</html>

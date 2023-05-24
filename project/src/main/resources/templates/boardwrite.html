@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bulletin Board Form</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<style>
+
+    .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .form-title {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .submit-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .submit-button:hover {
+        background-color: #45a049;
+    }
+
+</style>
+<body>
+<div class="form-container">
+    <h2 class="form-title">게시글 작성</h2>
+    <form id="article-form" action="/board/boardwritepro" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">제목:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="content">내용:</label>
+            <textarea id="content" name="content" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <input type="file" name ="file"></label>
+        </div>
+        <button type="submit" class="submit-button">작성</button>
+    </form>
+    <br>
+    <form action="/board" metho="post">
+    <button th:href="@{/board}"  class="submit-button">뒤로</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/FinalCheck.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="info">
+</div>
+<form action="/machines" method="POST">
+<div id="checkFrame">
+  <h1>PC 부품 추가</h1>
+  <ul class="card_list">
+    <li class="card_item">
+      <div class="part_list">
+        <label for="cpu">CPU:</label>
+      </div>
+      <div class="result">
+        <input type="text" id="cpu" name="cpu" required><br>
+
+      </div>
+    </li>
+    <li class="card_item">
+      <div class="part_list">
+        <label for="mainboard">Mainboard:</label>
+      </div>
+      <div class="result">
+        <input type="text" id="mainboard" name="mainboard" required><br>
+      </div>
+    <li class="card_item">
+      <div class="part_list">
+        <label for="ram">RAM:</label>
+      </div>
+      <div class="result">
+        <input type="text" id="ram" name="ram" required><br>
+      </div>
+    </li>
+    <li class="card_item">
+      <div class="part_list">
+        <label for="ssd">SSD:</label>
+      </div>
+      <div class="result">
+        <input type="text" id="ssd" name="ssd" required><br>
+      </div>
+    </li>
+    <li class="card_item">
+      <div class="part_list">
+        <label for="gpu">GPU:</label>
+      </div>
+      <div class="result">
+        <input type="text" id="gpu" name="gpu" required><br>
+      </div>
+    </li>
+    <li class="card_item">
+      <div class="part_list">
+      <label for="power">Power:</label>
+      </div>
+      <div class="result">
+      <input type="text" id="power" name="power" required><br>
+      </div>
+    </li>
+  </ul>
+  <button type="submit">추가</button>
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Add input fields for other attributes of MachineEntity -->
+
+</body>
+</html>

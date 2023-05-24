@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<th:block layout:fragment="title">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-title {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+    <title>상세 페이지</title>
+</th:block>
+<body>
+<th:block layout:fragment="content">
+
+    <div class="form-container">
+        <section>
+            <h2 class="form-title">상세 게시글</h2>
+            <div class="form-group">
+            <table class="tb tb_row">
+                <colgroup>
+                    <col style="width:10%;" /><col style="width:23%;" /><col style="width:10%;" /><col style="width:23%;" />
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th scope="row">번호</th>
+                    <td colspan="3">[[ ${board.id} ]]</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">제목</th>
+                    <td>[[ ${board.title} ]]</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">내용</th>
+                    <td colspan="3">[[ ${board.content} ]]</td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="btn_set">
+                <a th:href="@{/board/modify/{id}( id=${board.id} )}" class="btns btn_bdr4 btn_mid">수정</a>
+                <a th:href="@{/board/delete(id=${board.id} )}" class="btns btn_bdr4 btn_mid">삭제</a>
+                <a th:href="@{/board}" class="btns btn_bdr3 btn_mid">뒤로</a>
+            </p>
+            </div>
+        </section>
+    </div> <!--/* .content */-->
+
+</th:block>
+</body>
+</html>
+
