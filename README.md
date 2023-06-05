@@ -14,6 +14,17 @@
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Javat&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Springsecurity-6DB33F?style=for-the-badge&logo=Springsecurity&logoColor=white">
 
+## 담당 구현 파트
+
+프로젝트 개발환경 구축, 설계 참여
+
+메인 페이지 구현
+
+Header 메인 메뉴 디자인 및 구성(검색)
+
+GitHub 레포지토리 전체 관리
+
+스프링시큐리티 , oAuth2.0을 이용한 소셜로그인 (구글 , 네이버 , 카카오)
 
 
 
