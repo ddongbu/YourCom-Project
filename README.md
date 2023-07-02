@@ -5,7 +5,16 @@
 
 참여 인원: 1명
 
-## 사용 기술
+##  ⚙️ 프로젝트 개발 환경
+1.  운영체제 : Mac OS
+2.  통합개발환경(IDE) : IntelliJ IDEA
+3.  JDK 버전 : JDK 17
+4.  스프링 부트 버전 : 3.0.1
+5.  데이터 베이스 : 	MY SQL
+6.  빌드 툴 : Gradle
+7.  관리 툴 : GitHub
+ 
+## ⚒️ 프로젝트 기술 스택
 
  <img alt="C" src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/>
   <img src="https://img.shields.io/badge/Mysql-E6B91E?style=for-the-badge&logo=MySql&logoColor=white"/></a>
@@ -14,112 +23,33 @@
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Javat&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Springsecurity-6DB33F?style=for-the-badge&logo=Springsecurity&logoColor=white">
 
+
 ## 담당 구현 파트
 
 프로젝트 개발환경 구축, 설계 참여 완료
 
 메인 페이지 구현
 
-Header 메인 메뉴 디자인 및 구성(검색)
+견적 게시판 구현
 
 GitHub 레포지토리 전체 관리
 
 스프링시큐리티 , oAuth2.0을 이용한 소셜로그인 (구글 , 네이버 , 카카오).
 
 
+# 📜프로젝트 구현기능
 
-
-## 작성코드
-
-## 구현한 코드
-
-_프로젝트중 글쓴이가 작성한 코드_
-  
-## 작성코드
-### 로그인
-```
-<form action="/loginProc" method="post" >
-    <div id="header" style="text-align : center">
-        <a href="/" target="_blank" title="메인 페이지로 돌아가기" style="text-decoration: none" ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4wQe6oRdWzwrkzHcOqmfeLpG7kGdcRuWWPDS8rxFjQGbdx8xQlmgtvwxPktn4H9gucdU&usqp=CAU" id="logo"></a>
-    </div>
-    <div>
-        <label for="textEmail">이메일</label>
-        <input type="email" id="textEmail" name="memberEmail" placeholder="이메일을 선택하세요." required>
-        <span>@</span>
-        <select id="select">
-            <option value="" disabled selected>E-Mail 선택</option>
-            <option value="naver.com" id="naver.com">naver.com</option>
-            <option value="hanmail.net" id="hanmail.net">hanmail.net</option>
-            <option value="gmail.com" id="gmail.com">gmail.com</option>
-            <option value="nate.com" id="nate.com">nate.com</option>
-            <option value="directly" id="text">직접 입력하기</option>
-        </select>
-    </div>
-    <div>
-        <label for="password">비밀번호</label>
-        <input type="password" id="password" name="memberPassword" placeholder="특수문자+영문자 포함">
-        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-            <span th:text="${errorMessage}"></span>
-        </div>
-    <button type="submit">로그인 하기</button>
-        <br>
-
-    </div>
-    </form>
+-   **회원 (Member)**  
+    - 회원가입 / 로그인, 로그아웃 
     
-form으로 데이터를 보내면     
-Entity ->
-
-public static MemberEntity toMemberEntity(MemberDTO memberDTO){
-        MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setId(memberDTO.getID());
-        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
-        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
-        memberEntity.setMemberName(memberDTO.getMemberName());
-        memberEntity.setRole(memberDTO.getRole());
-        return memberEntity;
-    }
- Interface ->
- public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
-    Optional<MemberEntity> findByMemberEmail(String memberEmail);
-
-}
-service-> 
-ex: 회원가입
- public void save(MemberDTO memberDTO) {
-        //1.dto-> entity 변환
-        //2. repository의 join 메서드 호출
-        MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
-        String encodedPassword = passwordEncoder.encode(memberEntity.getMemberPassword());
-        memberEntity.setMemberPassword(encodedPassword);
-        memberRepository.save(memberEntity);
-        //JPA에서 주는 SAVE메서드 무조건
-    }
- login -> 
- public MemberDTO login(MemberDTO memberDto) {
-        Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberDto.getMemberEmail());
-        if (byMemberEmail.isPresent()) {
-            // there are query results
-            MemberEntity memberEntity = byMemberEmail.get();
-            if (passwordEncoder.matches(memberDto.getMemberPassword(), memberEntity.getMemberPassword())) {
-                // 비밀번호 동일시
-                MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
-                return dto;
-            } else {
-                // 비밀번호 틀림
-                return null;
-            }
-        } else {
-            // 결과 널값;
-            return null;
-        }
-    }
-```
-## Views
-```
-
-```
+-   **주문 (Order)**  
+    - 상품 주문 
+    
+-   **장바구니 (Cart)**  
+    - 장바구니 담기
 
 
- 
-.
+#  💡이러한 프로젝트를 진행하는 이유
+
+백엔드 처리를 해보고자 하는 마음에 진행하였고 웹개발의 백엔드의 개발능력을 향상시키고자 했습니다
+또한, 개발 과정에서 맞이하는 에러 및 궁금증들을 자세하게 찾아보고 정리하면서 전체적인 흐름 파악을 목표로 두었으며 프론트보다는 백엔드에 좀 더 집중했습니다.
